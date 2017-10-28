@@ -9,6 +9,8 @@ class Node {
 
     public char value; //black 'B' or white 'W'
 
+    public boolean hasChess;
+
     //copy constructor
     public Node(Node other) {
         this.x = other.x;
