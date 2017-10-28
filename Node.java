@@ -13,6 +13,7 @@ class Node {
     public Node(Node other) {
         this.x = other.x;
         this.y = other.y;
+        this.value = other.value;
     }
 
     //constructor
