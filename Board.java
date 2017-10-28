@@ -1,7 +1,10 @@
 import java.util.*;
 
 class Board{
-   public static Node[][] board = new Node[8][8];
+  public static final char WHITE = "W";
+  public static final char BLACK = "B";
+
+   public  Node[][] board = new Node[8][8];
 
    // copy constructor
    public Board(Board other){
@@ -17,10 +20,10 @@ class Board{
      for(int i = 0; i < 8; i++){
         for(int j = 0; j < 8; j++){
           if(i == 0 || i == 1){
-            board[j][i] = new Node(j, i, 'B');
+            board[j][i] = new Node(j, i, BLACK);
           }
           else if(i == 6 || i == 7){
-            board[j][i] = new Node(j, i, 'W');
+            board[j][i] = new Node(j, i, WHITE);
           }
           else{
             board[j][i] = new Node(j, i, '_');
