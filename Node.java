@@ -34,7 +34,7 @@ class Node {
 
 
     public boolean equals(Node other) {
-        return ((this.x == other.x) && (this.y == other.y));
+        return ((this.x == other.x) && (this.y == other.y) && (this.value == other.value));
     }
 
 
