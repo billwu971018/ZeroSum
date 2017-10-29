@@ -2,9 +2,9 @@ import java.util.*;
 
 class Board{
 
-  public static final char WHITE = "W";
-  public static final char BLACK = "B";
-
+  public static final char WHITE = 'W';
+  public static final char BLACK = 'B';
+  public double value;
    public  Node[][] board = new Node[8][8];
 
    // copy constructor
@@ -14,7 +14,12 @@ class Board{
           this.board[j][i] = new Node(other.board[j][i]);
         }
       }
+      this.value = other.value;
    }
+   //fake board
+   // public Board(){
+
+   // }
 
    // default constructor
    public Board(){
@@ -185,4 +190,9 @@ class Board{
     }
     return retval;
   }
+  public boolean isGoal(){
+    return false;
+  }
+
+
  }
