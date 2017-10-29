@@ -5,8 +5,8 @@ public class ABsearch{
 
 	public static final int DEPTH = 6;
 
-	public static double AlphaBeta(Board board, int depth, int a, int b, boolean maxPlayer){
-		if (depth ==0 | board.isGoal){
+	public static double AlphaBeta(Board board, int depth, double a, double b, boolean maxPlayer){
+		if (depth ==0 | board.isGoal()){
 			char color; 
 			if(maxPlayer){
 				color = Board.WHITE;
@@ -14,13 +14,13 @@ public class ABsearch{
 			else{
 				color = Board.BLACK;
 			}
-			return Strategy.offensiveGiven(color);
+			return Strategy.offensiveGiven(board, color);
 		}
 		if(maxPlayer){
-			double bestValue = (double) Math.MIN_VALUE;
+			double bestValue = (double) Integer.MIN_VALUE;
 			for (Board it_board : board.getSuccessors(Board.BLACK)) {
 				bestValue = Math.max(bestValue, AlphaBeta(it_board, depth-1, a, b, false));
-				a = max(a, bestValue);
+				a = Math.max(a, bestValue);
 				if(b <= a){
 					break; // b cut off
 				}
@@ -29,10 +29,10 @@ public class ABsearch{
 
 		}
 		else{
-			double bestValue = (double) Math.MAX_VALUE;
+			double bestValue = (double) Integer.MAX_VALUE;
 			for (Board it_board : board.getSuccessors(Board.WHITE)) {
 				bestValue = Math.min(bestValue, AlphaBeta(it_board, depth-1, a, b, true));
-				b = min(b, bestValue);
+				b = Math.min(b, bestValue);
 				if(b <= a){
 					break; // a cut off
 				}
@@ -50,7 +50,7 @@ public class ABsearch{
 	    firstLevel = board.getSuccessors(Board.BLACK);
 	    double bestValue = (double)Integer.MIN_VALUE;
 	    for(Board curr : firstLevel){
-	      double v = AlphaBeta(curr, DEPTH - 1, Math.MIN_VALUE, MATH.MAX_VALUE, false);
+	      double v = AlphaBeta(curr, DEPTH - 1, (double)Integer.MIN_VALUE, (double)Integer.MAX_VALUE, false);
 	      curr.value = v;
 	      if(v > bestValue){
 	        retval = new Board(curr); 
@@ -59,4 +59,4 @@ public class ABsearch{
 	    return retval;
 	    }
 	}
-}	
+	

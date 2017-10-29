@@ -216,11 +216,12 @@ public class ZeroSum extends JFrame  {
     // testlable.setIcon(imageIcon_blue);
     // testprint(a);
     int i = 0;
-    while(i< 30){
+    while(!a.isGoal() && !b.isGoal()){
       if(i%2 == 0){
-        b = MiniMax.getState(a);
+        b = ABsearch.getState(a);
         testprint(b);
         b.printBoard();
+        System.out.print("enter");
       }
       else{
         a = test.getState(b);
@@ -229,8 +230,7 @@ public class ZeroSum extends JFrame  {
       }
       i++;
     }
-}
+  }
 }
 
- }
-}
+ 
