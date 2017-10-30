@@ -220,7 +220,7 @@ public class ZeroSum extends JFrame  {
     int i = 0;
     while(!a.isGoal()){
       if(i%2 == 0){
-        a = new Board(ABsearch.getState(a, Board.BLACK, "d1"));
+        a = new Board(ABsearch.getState(a, Board.BLACK, "d2"));
         testprint(a);
         System.out.println();
         a.printBoard();
@@ -228,7 +228,7 @@ public class ZeroSum extends JFrame  {
       }
       else{
         System.out.print(a.closetWhite.size());
-        a = new Board(ABsearch.getState(a, Board.WHITE, "d2"));
+        a = new Board(ABsearch.getState(a, Board.WHITE, "o2"));
         testprint(a);
         System.out.println();
         a.printBoard();
