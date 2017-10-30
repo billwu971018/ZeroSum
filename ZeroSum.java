@@ -286,32 +286,95 @@ public class ZeroSum extends JFrame  {
    
 
     Component currSquare =  chessBoard.findComponentAt(1 * 75, 1*75);
-   
+
+    // System.out.println(c instanceof JLabel);
+
+
+    //       if(c instanceof JLabel){
+    //         System.out.println("asdsa");
+    //         Container parent = c.getParent();
+    //         parent.remove(0);
+
+    //       }
+
+
+
+    // JLabel piece = new JLabel(imageIcon_blue);
+    // JPanel panel = (JPanel)chessBoard.getComponent(5*8 + 5);
+
+    // panel.add(piece);
+
+    // Container parent = currSquare.getParent();
+    // parent.remove(currSquare);
+
+    // currSquare = chessBoard.findComponentAt(1 * 75, 2 * 75);
+    // parent = currSquare.getParent();
+    // parent.remove(currSquare);
+    // testprint(a);
+    // a.printBoard();
+
+    // JLabel testlable = (JLabel)currSquare;
+    // testlable.setIcon(imageIcon_blue);
+    // testprint(a);
+    //ABsearch player1 = new ABsearch();
+    //for minimax
+    ABsearch player1 = new ABsearch();
+    ABsearch player2 = new ABsearch();
+
     int i = 0;
+    int move = 0;
+    int winnerMove = 0;
+    int blackCaptured = 0;
+    int whiteCaptured = 0;
+    String winner = "";
+    long startTime = System.nanoTime();
     while(!a.isGoal()){
       if(i%2 == 0){
-        a = new Board(ABsearch.getState(a, Board.WHITE, "o1"));
+
+        move++;
+        a = new Board(player1.getState(a, Board.BLACK, "d2"));
+
         testprint(a);
         System.out.println();
         a.printBoard();
-
+        if(a.isGoal()){
+          blackCaptured = 16 - a.numRem(Board.WHITE);
+          whiteCaptured = 16 - a.numRem(Board.BLACK);
+          winner = "First Player BLACK(RED)";
+        }
       }
       else{
-       
-        a = new Board(MiniMax.getState(a));
+
+        move++;
+        a = new Board(player2.getState(a, Board.WHITE, "o1"));
+
         testprint(a);
         System.out.println();
         a.printBoard();
-
+        if(a.isGoal()){
+          blackCaptured = 16 - a.numRem(Board.WHITE);
+          whiteCaptured = 16 - a.numRem(Board.BLACK);
+          winner = "Second Player WHITE(BLUE)";
+        }
       }
       i++;
     }
-    System.out.println(ABsearch.DEPTH);
-    System.out.println(test.MAX_DEPTH);
 
-
+    long endTime = System.nanoTime();
+    long deltaTime = endTime - startTime;
+    double avgTime = deltaTime / (double)move;
+    System.out.println(winner + " WINS!");
+    System.out.println("Player1 BLACK(RED) expended: " + player1.expended);
+    System.out.println("Player2 WHITE(BLUE) expended: " + player2.expended);
+    double avgMove = ((double)player1.expended + (double)player2.expended) / move;
+    System.out.println("Average nodes expended per move: " + avgMove);
+    System.out.println("Average time(second) used for per move: " + avgTime/1000000000 + "s");
+    System.out.println("BLACK(RED) captured: " + blackCaptured + " opponent workers.");
+    System.out.println("WHITE(BLUE) captured: " + whiteCaptured + " opponent workers.");
+    System.out.println("Total number of moves: " + move);
 
   }
+
 }
 
 
