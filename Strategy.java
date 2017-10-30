@@ -21,15 +21,8 @@ class Strategy{
 		else{
 			mColor = Board.BLACK;
 		}
-		return 2*(30 - board.numRem(oColor)) + Math.random() +  7* board.maxdistanceScore(mColor) + Math.random();
+		return 40*(board.numRem(mColor) -1.5 * board.numRem(oColor)) + Math.random() 
+		+  1.5* board.maxdistanceScore(mColor) + Math.random();
 	}
-
-	// public static int chooseStrategy(String myStrategy, Board, ){
-
-	// }
-	// public static 
-
-
-
 
 }
