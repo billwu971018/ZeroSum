@@ -48,10 +48,10 @@ class Strategy{
 		else{
 			for(int curr: whiteDist){
 				totalMScore += curr;
-			 }
+			}
 			 for(int curr : blackDist){
 			 	totalOScore += curr;
-			 }
+			}
 		}
 
 		int maxDist = 0; // my max distance to goal state
@@ -105,7 +105,7 @@ class Strategy{
 	 	}
 
     	double retval = (board.numRem(mColor) - 1.5 * board.numRem(oColor)) +
-    					1.5 * totalMScore - totalOScore + maxDist - maxDistOp + Math.random();
+    					1.5 * totalMScore - totalOScore +2 * maxDist - maxDistOp + Math.random();
 		//System.out.println("totalMScore : " + totalMScore);
 		//System.out.println("totalOScore : " + totalOScore);
 		//System.out.println("o2 score : " + retval);
@@ -198,7 +198,7 @@ class Strategy{
 
 
 	    double retval = (1.5 * board.numRem(mColor) - board.numRem(oColor)) + 
-	    				totalMScore - totalOScore + maxDist - maxDistOp + Math.random();
+	    				totalMScore - 1.5 * totalOScore + maxDist - 2* maxDistOp + Math.random();
 			//System.out.println("totalMScore : " + totalMScore);
 			//System.out.println("totalOScore : " + totalOScore);
 			//System.out.println("o2 score : " + retval);
