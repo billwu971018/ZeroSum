@@ -211,7 +211,7 @@ class Board{
           for(int j = 0; j < 8; j++){
             if(this.board[j][i].value == WHITE){
               //adding black chessmen distance
-              int input = 7 - i;
+              int input = 8 - i;
               retval.add(input);
 
             }

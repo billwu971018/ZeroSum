@@ -3,6 +3,7 @@ import java.util.*;
 class Strategy{
 
 	public static double defensiveGiven(Board board, char mColor){
+
 		return 2 * board.numRem(mColor) + Math.random();
 	}
 
@@ -64,8 +65,9 @@ class Strategy{
 			 	winStep = Collections.max(blackDist);
 			}
 
-			if(winStep == 6){
+			if(winStep == 7){
 				// winning step only from 6
+				if(depth == 4) maxDist = 1000000;
 				if(depth == 3) maxDist = 10000;
 		 		if(depth == 2) maxDist = 1000;
 
@@ -76,7 +78,7 @@ class Strategy{
 		 	if(!whiteDist.isEmpty()){
 		 		owinStep = Collections.max(whiteDist);
 		 	}
-		 	if( owinStep == 6 ){
+		 	if( owinStep == 7 ){
 		 	    if(depth == 3) maxDistOp = 10000;
 		 	    if(depth == 2) maxDistOp = 1000;
 		 	}
@@ -88,7 +90,8 @@ class Strategy{
 			if(!whiteDist.isEmpty()) {
 			 	winStep = Collections.max(whiteDist);
 			}
-			if(winStep == 6){
+			if(winStep == 7){
+				if(depth == 4) maxDist = 1000000;
 				if(depth == 3) maxDist = 10000;
 		 		if(depth == 2) maxDist = 1000;
 		 	}
@@ -97,7 +100,7 @@ class Strategy{
 		 	if(!blackDist.isEmpty()){
 		 		owinStep = Collections.max(blackDist);
 		 	}
-		 	if( owinStep == 6 ){
+		 	if( owinStep == 7 ){
 		 	    if(depth == 3) maxDistOp = 10000;
 		 	    if(depth == 2) maxDistOp = 1000;
 		 	}
@@ -105,7 +108,7 @@ class Strategy{
 	 	}
 
     	double retval = (board.numRem(mColor) - 1.5 * board.numRem(oColor)) +
-    					1.5 * totalMScore - totalOScore +2 * maxDist - maxDistOp + Math.random();
+    					1.5 * totalMScore +2 * maxDist + Math.random();
 		//System.out.println("totalMScore : " + totalMScore);
 		//System.out.println("totalOScore : " + totalOScore);
 		//System.out.println("o2 score : " + retval);
@@ -113,6 +116,7 @@ class Strategy{
 	}
 
 	public static double defensive(Board board, char mColor, int depth){
+
 		char oColor;
 		if(mColor == Board.BLACK){
 			oColor = Board.WHITE;
@@ -168,7 +172,7 @@ class Strategy{
 		 	if(!whiteDist.isEmpty()){
 		 		owinStep = Collections.max(whiteDist);
 		 	}
-		 	if( owinStep == 6 ){
+		 	if( owinStep == 7 ){
 		 	    if(depth == 3) maxDistOp = 10000;
 		 	    if(depth == 2) maxDistOp = 1000;
 		 	}
@@ -180,7 +184,7 @@ class Strategy{
 			if(!whiteDist.isEmpty()) {
 			 	winStep = Collections.max(whiteDist);
 			}
-			if(winStep == 6){
+			if(winStep == 7){
 				if(depth == 3) maxDist = 10000;
 		 		if(depth == 2) maxDist = 1000;
 		 	}
@@ -189,7 +193,7 @@ class Strategy{
 		 	if(!blackDist.isEmpty()){
 		 		owinStep = Collections.max(blackDist);
 		 	}
-		 	if( owinStep == 6 ){
+		 	if( owinStep == 7 ){
 		 	    if(depth == 3) maxDistOp = 10000;
 		 	    if(depth == 2) maxDistOp = 1000;
 		 	}

@@ -8,12 +8,15 @@ public class ABsearch{
 	public static double AlphaBeta(Board board, int depth, double a, double b, char mColor, boolean maxPlayer, String heu){
 
 		if (depth ==0 | board.isGoal()){
-			if(heu.equals("o1"))
+			if(heu.equals("o1")){
 			return Strategy.offensiveGiven(board, mColor);
-			if(heu.equals("o2"))
+		}
+			if(heu.equals("o2")){
 			return Strategy.offensive(board, mColor, depth);
-			if(heu.equals("d1"))
+		}
+			if(heu.equals("d1")){
 			return Strategy.defensiveGiven(board, mColor);
+		}
 			return Strategy.defensive(board, mColor, depth);
 		}
 
@@ -26,7 +29,7 @@ public class ABsearch{
 			else{
 				nextColor = Board.WHITE;
 			}
-			for (Board it_board : board.getSuccessors(Board.BLACK)) {
+			for (Board it_board : board.getSuccessors(mColor)) {
 				bestValue = Math.max(bestValue, AlphaBeta(it_board, depth-1, a, b, nextColor, false, heu));
 				a = Math.max(a, bestValue);
 				if(b <= a){
@@ -46,7 +49,7 @@ public class ABsearch{
 			else{
 				nextColor = Board.WHITE;
 			}
-			for (Board it_board : board.getSuccessors(Board.WHITE)) {
+			for (Board it_board : board.getSuccessors(mColor)) {
 				bestValue = Math.min(bestValue, AlphaBeta(it_board, depth-1, a, b, nextColor, true, heu));
 				b = Math.min(b, bestValue);
 				if(b <= a){
