@@ -1,11 +1,17 @@
 import java.util.*;
+import java.util.Collections;
 
 class Board{
 
   public static final char WHITE = 'W';
   public static final char BLACK = 'B';
   public double value;
+
    public  Node[][] board = new Node[8][8];
+
+  List<Integer> closetWhite = new ArrayList<Integer>(); 
+
+  List<Integer> closetBlack = new ArrayList<Integer>();
 
    // copy constructor
    public Board(Board other){
@@ -170,8 +176,12 @@ class Board{
     List<Node> retval = new ArrayList<Node>();
     for(int i = 0; i < 8; i++){
       for(int j = 0; j < 8; j++){
-        if(this.board[j][i].value == 'B'){
+        if(this.board[j][i].value == BLACK){
           retval.add(this.board[j][i]);
+
+          //adding black chessmen distance
+          closetBlack.add(i);
+
         }
       }
     }
@@ -183,16 +193,54 @@ class Board{
     List<Node> retval = new ArrayList<Node>();
     for(int i = 0; i < 8; i++){
       for(int j = 0; j < 8; j++){
-        if(this.board[j][i].value == 'W'){
+        if(this.board[j][i].value == WHITE){
           retval.add(this.board[j][i]);
+
+          // adding white chessmen distance
+          closetWhite.add(7-i);
+
         }
       }
     }
     return retval;
   }
+
   public boolean isGoal(){
+  
+    for(int j = 0; j < 8; j++){
+        if(board[j][0].value == WHITE){
+          return true;
+        }
+        if(board[j][7].value == BLACK){
+          return true;
+        }
+    }
+    if(numRem(WHITE)==0 | numRem(BLACK) == 0){
+      return true;
+    }
     return false;
+
   }
+
+  //for offensive herustic 2
+  public double closetChess(Board board, char mColor){
+    return -1.0;
+  }
+
+  public int maxdistanceScore(char mColor){
+    getWhite();
+    getBlack();
+    if(mColor == Board.BLACK){
+      return Collections.max(closetBlack);
+    }
+    else{
+      return Collections.max(closetWhite);
+    }
+    
+  }
+
+
+
 
 
  }

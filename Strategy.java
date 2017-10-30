@@ -14,12 +14,20 @@ class Strategy{
 	}
 
 	public static double offensive(Board board, char oColor){
-		return -1.0;
+		char mColor;
+		if(oColor == Board.BLACK){
+			mColor = Board.WHITE;
+		}
+		else{
+			mColor = Board.BLACK;
+		}
+		return 2*(30 - board.numRem(oColor)) + Math.random() +  7* board.maxdistanceScore(mColor) + Math.random();
 	}
 
 	// public static int chooseStrategy(String myStrategy, Board, ){
 
 	// }
+	// public static 
 
 
 

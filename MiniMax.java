@@ -52,6 +52,7 @@ class MiniMax{
       curr.value = v;
       if(v > bestValue){
         retval = new Board(curr); 
+        bestValue = v;
       }
     }
     return retval;

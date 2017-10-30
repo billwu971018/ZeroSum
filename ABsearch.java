@@ -3,9 +3,10 @@ import java.lang.Math;
 
 public class ABsearch{
 
-	public static final int DEPTH = 6;
+	public static final int DEPTH = 5;//search depth
 
 	public static double AlphaBeta(Board board, int depth, double a, double b, boolean maxPlayer){
+		
 		if (depth ==0 | board.isGoal()){
 			char color; 
 			if(maxPlayer){
@@ -14,8 +15,9 @@ public class ABsearch{
 			else{
 				color = Board.BLACK;
 			}
-			return Strategy.offensiveGiven(board, color);
+			return Strategy.offensive(board, color);
 		}
+
 		if(maxPlayer){
 			double bestValue = (double) Integer.MIN_VALUE;
 			for (Board it_board : board.getSuccessors(Board.BLACK)) {
@@ -28,6 +30,7 @@ public class ABsearch{
 			return bestValue;
 
 		}
+
 		else{
 			double bestValue = (double) Integer.MAX_VALUE;
 			for (Board it_board : board.getSuccessors(Board.WHITE)) {
@@ -38,7 +41,6 @@ public class ABsearch{
 				}
 			}
 			return bestValue;
-
 		}
 
 	}
@@ -47,15 +49,21 @@ public class ABsearch{
 
 		Board retval = new Board();
 	    List<Board> firstLevel = new ArrayList<Board>();
+
 	    firstLevel = board.getSuccessors(Board.BLACK);
+
 	    double bestValue = (double)Integer.MIN_VALUE;
+
 	    for(Board curr : firstLevel){
 	      double v = AlphaBeta(curr, DEPTH - 1, (double)Integer.MIN_VALUE, (double)Integer.MAX_VALUE, false);
 	      curr.value = v;
 	      if(v > bestValue){
+	      	//find the max value
 	        retval = new Board(curr); 
+	        bestValue = v;
 	      }
 	    }
+
 	    return retval;
 	    }
 	}
