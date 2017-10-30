@@ -217,7 +217,7 @@ class Strategy{
 		maxDist = 1000;
 	}
  }
-    double retval = 30 * (6 * board.numRem(mColor) - board.numRem(oColor)) + totalMScore - 1.5 * totalOScore + 50 * maxDist - 100 * maxDistOp + Math.random();
+    double retval = 30 * (3 * board.numRem(mColor) - board.numRem(oColor)) + totalMScore - 1.5 * totalOScore + 50 * maxDist - 100 * maxDistOp + Math.random();
 		//System.out.println("totalMScore : " + totalMScore);
 		//System.out.println("totalOScore : " + totalOScore);
 		//System.out.println("o2 score : " + retval);
