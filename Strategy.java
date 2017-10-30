@@ -39,18 +39,18 @@ class Strategy{
 
 		if(mColor == Board.BLACK){
 			for(int curr: blackDist){
-				totalMScore += curr;
+				totalMScore += curr * curr;
 			}
 			for(int curr:whiteDist){
-				totalOScore += curr;
+				totalOScore += curr * curr;
 				}
 		 	}
 		else{
 			for(int curr: whiteDist){
-				totalMScore += curr;
+				totalMScore += curr * curr;
 			}
 			 for(int curr : blackDist){
-			 	totalOScore += curr;
+			 	totalOScore += curr * curr;
 			}
 		}
 
@@ -104,11 +104,10 @@ class Strategy{
 
 	 	}
 
-    	double retval = (board.numRem(mColor) - 1.5 * board.numRem(oColor)) +
-    					1.5 * totalMScore - totalOScore +2 * maxDist - maxDistOp + Math.random();
+    	double retval = 20 * (board.numRem(mColor) - 1.5 * board.numRem(oColor)) + 1.5 * totalMScore - totalOScore + 100 * maxDist - 50 * maxDistOp + Math.random();
 		//System.out.println("totalMScore : " + totalMScore);
 		//System.out.println("totalOScore : " + totalOScore);
-		//System.out.println("o2 score : " + retval);
+		System.out.println("o2 score : " + retval);
 		return retval;
 	}
 
@@ -131,18 +130,18 @@ class Strategy{
 
 		if(mColor == Board.BLACK){
 			for(int curr: blackDist){
-				totalMScore += curr;
+				totalMScore += curr * curr;
 			}
 			for(int curr:whiteDist){
-				totalOScore += curr;
+				totalOScore += curr * curr;
 				}
 		 	}
 		else{
 			for(int curr: whiteDist){
-				totalMScore += curr;
+				totalMScore += curr * curr;
 			 }
 			 for(int curr : blackDist){
-			 	totalOScore += curr;
+			 	totalOScore += curr * curr;
 			 }
 		}
 
@@ -197,12 +196,7 @@ class Strategy{
 	 	}
 
 
-<<<<<<< HEAD
-	    double retval = (1.5 * board.numRem(mColor) - board.numRem(oColor)) +
-=======
-	    double retval = (1.5 * board.numRem(mColor) - board.numRem(oColor)) + 
->>>>>>> d77738a37cdca1d9459b3dcc552bec2b2cefbaa1
-	    				totalMScore - 1.5 * totalOScore + maxDist - 2* maxDistOp + Math.random();
+	    double retval = 30 * (6 * board.numRem(mColor) - board.numRem(oColor)) + totalMScore - 1.5 * totalOScore + 50 * maxDist - 100 * maxDistOp + Math.random();
 			//System.out.println("totalMScore : " + totalMScore);
 			//System.out.println("totalOScore : " + totalOScore);
 			//System.out.println("o2 score : " + retval);

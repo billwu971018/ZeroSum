@@ -230,7 +230,7 @@ public class ZeroSum extends JFrame  {
     while(!a.isGoal()){
       if(i%2 == 0){
         move++;
-        a = new Board(player1.getState(a, Board.BLACK, "o2"));
+        a = new Board(player1.getState(a, Board.BLACK, "d2"));
         testprint(a);
         System.out.println();
         a.printBoard();
@@ -242,7 +242,7 @@ public class ZeroSum extends JFrame  {
       }
       else{
         move++;
-        a = new Board(player2.getState(a, Board.WHITE, "d1"));
+        a = new Board(player2.getState(a, Board.WHITE, "o1"));
         testprint(a);
         System.out.println();
         a.printBoard();

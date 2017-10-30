@@ -3,7 +3,7 @@ import java.lang.Math;
 
 public class ABsearch{
 
-	public static final int DEPTH = 5;//search depth
+	public static final int DEPTH = 4;//search depth
 	public int expended = 0;
 
 	public double AlphaBeta(Board board, int depth, double a, double b, char mColor, boolean maxPlayer, String heu){
@@ -32,10 +32,10 @@ public class ABsearch{
 			for (Board it_board : successors) {
 				expended++;
 				bestValue = Math.max(bestValue, AlphaBeta(it_board, depth-1, a, b, nextColor, false, heu));
-				if(bestValue >= b){
-					return bestValue;
-				}
 				a = Math.max(a, bestValue);
+				if(b <= a){
+					break; // b cut off
+				}
 			}
 			return bestValue;
 
@@ -55,10 +55,9 @@ public class ABsearch{
 			for (Board it_board : successors) {
 				bestValue = Math.min(bestValue, AlphaBeta(it_board, depth-1, a, b, nextColor, true, heu));
 				b = Math.min(b, bestValue);
-				if(bestValue <= a){
-					return bestValue;
+				if(b <= a){
+					break; // a cut off
 				}
-				b = Math.min(b, bestValue);
 			}
 			return bestValue;
 		}
@@ -91,10 +90,6 @@ public class ABsearch{
 	        retval = new Board(curr);
 	        bestValue = v;
 	      }
-				a = Math.max(a, bestValue);
-				if(b <= a){
-					break; // b cut off
-				}
 	    }
 
 	    return retval;
