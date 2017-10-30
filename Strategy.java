@@ -131,6 +131,7 @@ class Strategy{
 		else{
 			oColor = Board.BLACK;
 		}
+<<<<<<< HEAD
 		List<Integer> blackDist = new ArrayList<Integer>();
 		List<Integer> whiteDist = new ArrayList<Integer>();
 		blackDist = board.getBlackDist();
@@ -222,6 +223,16 @@ class Strategy{
 		//System.out.println("totalOScore : " + totalOScore);
 		//System.out.println("o2 score : " + retval);
 		return retval;
+=======
+<<<<<<< HEAD
+		return 40*(board.numRem(mColor) -1.5 * board.numRem(oColor)) + Math.random() 
+		+  1.5* board.maxdistanceScore(mColor) + Math.random();
+	}
+
+}
+=======
+		return board.numRem(mColor) - board.numRem(oColor) + Math.random();
+>>>>>>> aba5c8299086bf3b6fbc2ab23dee92cdfaddf522
 	}
 
 	// public static int chooseStrategy(String myStrategy, Board, ){
@@ -233,3 +244,4 @@ class Strategy{
 
 
 }
+>>>>>>> 2431b956c0ed93f30b4de42580c62b955a7162b2
