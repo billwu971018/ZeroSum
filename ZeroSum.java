@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
- 
+
 public class ZeroSum extends JFrame  {
   static JLayeredPane layeredPane;
   static JPanel chessBoard;
@@ -13,10 +13,10 @@ public class ZeroSum extends JFrame  {
   public static Board board = new Board();
   public static ImageIcon imageIcon_blue = new ImageIcon("chess_blue.png");// load the image to a imageIcon
   public static ImageIcon imageIcon = new ImageIcon("chess.png"); // load the image to a imageIcon
- 
+
   public ZeroSum(Board board){
   Dimension boardSize = new Dimension(600, 600);
- 
+
   //  Use a Layered Pane for this this application
   layeredPane = new JLayeredPane();
   getContentPane().add(layeredPane);
@@ -24,18 +24,18 @@ public class ZeroSum extends JFrame  {
   // layeredPane.addMouseListener(this);
   // layeredPane.addMouseMotionListener(this);
 
-  //Add a chess board to the Layered Pane 
- 
+  //Add a chess board to the Layered Pane
+
   chessBoard = new JPanel();
   layeredPane.add(chessBoard, JLayeredPane.DEFAULT_LAYER);
   chessBoard.setLayout( new GridLayout(8, 8) );
   chessBoard.setPreferredSize( boardSize );
   chessBoard.setBounds(0, 0, boardSize.width, boardSize.height);
- 
+
   for (int i = 0; i < 64; i++) {
   JPanel square = new JPanel( new BorderLayout() );
   chessBoard.add( square );
- 
+
   int row = (i / 8) % 2;
   if (row == 0)
   square.setBackground( i % 2 == 0 ? Color.black : Color.white );
@@ -44,15 +44,15 @@ public class ZeroSum extends JFrame  {
   }
 
   // red chessman
-  
+
   Image image = imageIcon.getImage(); // transform it
   Image newimg = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
   imageIcon = new ImageIcon(newimg);  // transform it back
 
   // blue chessman
- 
+
   Image image_blue = imageIcon_blue.getImage(); // transform it
-  Image newimg_blue = image_blue.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way 
+  Image newimg_blue = image_blue.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
   imageIcon_blue = new ImageIcon(newimg_blue);  // transform it back
 
   // adding chessman to the board
@@ -67,8 +67,8 @@ public class ZeroSum extends JFrame  {
     JPanel panel = (JPanel)chessBoard.getComponent(i);
     panel.add(piece);
   }
-    
- 
+
+
 
   }
 
@@ -76,10 +76,10 @@ public class ZeroSum extends JFrame  {
   public static void selectChess(int x,int y){
     chessPiece = null;
     Component c =  chessBoard.findComponentAt(x, y);
-   
-    if (c instanceof JPanel) 
+
+    if (c instanceof JPanel)
     return;
-   
+
     Point parentLocation = c.getParent().getLocation();
     xAdjustment = parentLocation.x - x;
     yAdjustment = parentLocation.y - y;
@@ -88,13 +88,13 @@ public class ZeroSum extends JFrame  {
     chessPiece.setSize(chessPiece.getWidth(), chessPiece.getHeight());
     layeredPane.add(chessPiece, JLayeredPane.DRAG_LAYER);
   }
-  
+
   public static void moveChess(int new_x, int new_y){
      if(chessPiece == null) return;
-   
+
     chessPiece.setVisible(false);
     Component c =  chessBoard.findComponentAt(new_x, new_y);
-   
+
     if (c instanceof JLabel){
     Container parent = c.getParent();
     parent.remove(0);
@@ -104,7 +104,7 @@ public class ZeroSum extends JFrame  {
     Container parent = (Container)c;
     parent.add( chessPiece );
     }
-   
+
     chessPiece.setVisible(true);
   }
 
@@ -113,9 +113,9 @@ public class ZeroSum extends JFrame  {
       for(int j = 0; j < 8; j++){
 
         Component currSquare =  chessBoard.findComponentAt((j*75), (i*75));
-        
+
         // add blue chess
-      
+
         if(board.board[j][i].value == Board.WHITE ){
 
           if(currSquare instanceof JLabel){
@@ -166,14 +166,15 @@ public class ZeroSum extends JFrame  {
       }
     }
   }
- 
- 
+
+
   public static void main(String[] args) {
 
     Board a = new Board();
     Board b = new Board();
     // a.board[0][0].value = '_';
     // a.board[0][1].value = '_';
+
     JFrame frame = new ZeroSum(a);
     frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE );
     frame.pack();
@@ -188,14 +189,14 @@ public class ZeroSum extends JFrame  {
 
     // System.out.println(c instanceof JLabel);
 
-          
+
     //       if(c instanceof JLabel){
     //         System.out.println("asdsa");
     //         Container parent = c.getParent();
     //         parent.remove(0);
-            
+
     //       }
-        
+
 
 
     // JLabel piece = new JLabel(imageIcon_blue);
@@ -215,6 +216,7 @@ public class ZeroSum extends JFrame  {
     // JLabel testlable = (JLabel)currSquare;
     // testlable.setIcon(imageIcon_blue);
     // testprint(a);
+
     int i = 0;
     while(!a.isGoal() && !b.isGoal()){
       if(i%2 == 0){
@@ -232,5 +234,3 @@ public class ZeroSum extends JFrame  {
     }
   }
 }
-
- 
