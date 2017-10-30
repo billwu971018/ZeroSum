@@ -9,6 +9,8 @@ class Node {
 
     public char value; //black 'B' or white 'W'
 
+    public char oValue;
+
     public boolean hasChess;
 
     //copy constructor
@@ -16,6 +18,7 @@ class Node {
         this.x = other.x;
         this.y = other.y;
         this.value = other.value;
+        this.oValue = other.oValue;
     }
 
     //constructor
@@ -24,6 +27,13 @@ class Node {
         this.y = y;
 
         this.value = value;
+
+        if(value == Board.WHITE){
+            oValue = Board.BLACK;
+        }
+        else{
+            oValue = Board.WHITE;
+        }
 
 
     }

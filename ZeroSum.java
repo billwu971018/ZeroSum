@@ -62,10 +62,10 @@ public class ZeroSum extends JFrame  {
     panel.add(piece);
   }
 
-  for(int i =  48; i< 64; i++){
-    JLabel piece = new JLabel( imageIcon_blue );
-    JPanel panel = (JPanel)chessBoard.getComponent(i);
-    panel.add(piece);
+    for(int i =  48; i< 64; i++){
+      JLabel piece = new JLabel( imageIcon_blue );
+      JPanel panel = (JPanel)chessBoard.getComponent(i);
+      panel.add(piece);
   }
 
 
@@ -171,7 +171,7 @@ public class ZeroSum extends JFrame  {
   public static void main(String[] args) {
 
     Board a = new Board();
-    Board b = new Board();
+
     // a.board[0][0].value = '_';
     // a.board[0][1].value = '_';
 
@@ -218,19 +218,24 @@ public class ZeroSum extends JFrame  {
     // testprint(a);
 
     int i = 0;
-    while(!a.isGoal() && !b.isGoal()){
+    while(!a.isGoal()){
       if(i%2 == 0){
-        b = ABsearch.getState(a);
-        testprint(b);
-        b.printBoard();
-        System.out.print("enter");
+        a = ABsearch.getState(a, Board.BLACK, "o2");
+        testprint(a);
+        System.out.println();
+        a.printBoard();
+
       }
       else{
-        a = test.getState(b);
+        System.out.print(a.closetWhite.size());
+        a = ABsearch.getState(a, Board.WHITE, "d1");
         testprint(a);
+        System.out.println();
         a.printBoard();
+
       }
       i++;
     }
+
   }
 }

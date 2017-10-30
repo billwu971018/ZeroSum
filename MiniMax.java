@@ -4,20 +4,26 @@ import java.lang.Math;
 class MiniMax{
   // public static Board test  = new Board();
   public static final int MAX_DEPTH = 4;
-  public static double minimax(Board board, int depth, char mColor){
-    
+  public static double minimax(Board board, int depth, char mColor, Boolean max){
+
   	if(depth == 0 | board.isGoal()){
-  
-  		return Strategy.defensiveGiven(board, mColor);
+
+  		return Strategy.offensiveGiven(board, mColor);
 
   	}
   	// max player
-  	if(mColor == Board.BLACK){
+  	if(max){
 
   		double bestValue = (double)Integer.MIN_VALUE;
-    
+      char nextColor;
+      if(mColor == Board.WHITE){
+        nextColor = Board.BLACK;
+      }
+      else{
+        nextColor = Board.WHITE;
+      }
   		for (Board it_board : board.getSuccessors(mColor)) {
-  			double max = minimax(it_board, depth-1, Board.WHITE);
+  			double max = minimax(it_board, depth-1, nextColor, false);
   	   bestValue = Math.max(bestValue, max);
 
   		}
@@ -28,10 +34,16 @@ class MiniMax{
   	else {
 
   	   double bestValue = (double)Integer.MAX_VALUE;
-  
+       char nextColor;
+       if(mColor == Board.WHITE){
+         nextColor = Board.BLACK;
+       }
+       else{
+         nextColor = Board.WHITE;
+       }
   		for (Board it_board : board.getSuccessors(mColor)) {
 
-  			double max = minimax(it_board, depth-1, Board.BLACK); // change to next state
+  			double max = minimax(it_board, depth-1, nextColor, true); // change to next state
   			bestValue = Math.min(bestValue, max);
 
   		}
@@ -42,16 +54,24 @@ class MiniMax{
 
   }
 
-  public static Board getState(Board board){
+  public static Board getState(Board board, char mColor){
     Board retval = new Board();
     List<Board> firstLevel = new ArrayList<Board>();
     firstLevel = board.getSuccessors(Board.BLACK);
     double bestValue = (double)Integer.MIN_VALUE;
+    char nextColor;
+    if(mColor == Board.WHITE){
+      nextColor = Board.BLACK;
+    }
+    else{
+      nextColor = Board.WHITE;
+    }
     for(Board curr : firstLevel){
-      double v = minimax(curr, MAX_DEPTH - 1, Board.WHITE);
+      double v = minimax(curr, MAX_DEPTH - 1, nextColor, false);
       curr.value = v;
       if(v > bestValue){
-        retval = new Board(curr); 
+        retval = new Board(curr);
+        bestValue = v;
       }
     }
     return retval;
