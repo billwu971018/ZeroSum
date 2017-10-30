@@ -3,7 +3,7 @@ import java.lang.Math;
 
 public class ABsearch{
 
-	public static final int DEPTH = 5;//search depth
+	public static final int DEPTH = 4;//search depth
 
 	public static double AlphaBeta(Board board, int depth, double a, double b, char mColor, boolean maxPlayer, String heu){
 
@@ -11,10 +11,10 @@ public class ABsearch{
 			if(heu.equals("o1"))
 			return Strategy.offensiveGiven(board, mColor);
 			if(heu.equals("o2"))
-			return Strategy.offensive(board, mColor);
+			return Strategy.offensive(board, mColor, depth);
 			if(heu.equals("d1"))
 			return Strategy.defensiveGiven(board, mColor);
-			return Strategy.defensive(board, mColor);
+			return Strategy.defensive(board, mColor, depth);
 		}
 
 		if(maxPlayer){

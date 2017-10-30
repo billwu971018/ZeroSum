@@ -9,9 +9,9 @@ class Board{
 
    public  Node[][] board = new Node[8][8];
 
-  List<Integer> closetWhite = new ArrayList<Integer>(); 
+  public List<Integer> closetWhite = new ArrayList<Integer>();
 
-  List<Integer> closetBlack = new ArrayList<Integer>();
+  public List<Integer> closetBlack = new ArrayList<Integer>();
 
    // copy constructor
    public Board(Board other){
@@ -180,13 +180,46 @@ class Board{
           retval.add(this.board[j][i]);
 
           //adding black chessmen distance
-          closetBlack.add(i);
+          int input = i;
+          //System.out.println("INPUT : " + input);
+          closetBlack.add(input);
 
         }
       }
     }
     return retval;
   }
+
+  public List<Integer> getBlackDist(){
+    List<Integer> retval = new ArrayList<Integer>();
+      for(int i = 0; i < 8; i++){
+        for(int j = 0; j < 8; j++){
+          if(this.board[j][i].value == BLACK){
+            //adding black chessmen distance
+            int input = i;
+            retval.add(input);
+
+          }
+        }
+      }
+      return retval;
+    }
+
+    public List<Integer> getWhiteDist(){
+      List<Integer> retval = new ArrayList<Integer>();
+        for(int i = 0; i < 8; i++){
+          for(int j = 0; j < 8; j++){
+            if(this.board[j][i].value == WHITE){
+              //adding black chessmen distance
+              int input = 7 - i;
+              retval.add(input);
+
+            }
+          }
+        }
+        return retval;
+      }
+
 
   //helper function to get a list of white nodes, similar to getBlack
   public List<Node> getWhite(){
@@ -197,7 +230,8 @@ class Board{
           retval.add(this.board[j][i]);
 
           // adding white chessmen distance
-          closetWhite.add(7-i);
+          int input = 7 - i;
+          closetWhite.add(input);
 
         }
       }
@@ -206,7 +240,7 @@ class Board{
   }
 
   public boolean isGoal(){
-  
+
     for(int j = 0; j < 8; j++){
         if(board[j][0].value == WHITE){
           return true;
@@ -236,7 +270,7 @@ class Board{
     else{
       return Collections.max(closetWhite);
     }
-    
+
   }
 
 
