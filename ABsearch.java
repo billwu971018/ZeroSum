@@ -3,10 +3,11 @@ import java.lang.Math;
 
 public class ABsearch{
 
-	public static final int DEPTH = 4;//search depth
+	public static final int DEPTH = 5;//search depth
+	public int expended = 0;
 
-	public static double AlphaBeta(Board board, int depth, double a, double b, char mColor, boolean maxPlayer, String heu){
-
+	public double AlphaBeta(Board board, int depth, double a, double b, char mColor, boolean maxPlayer, String heu){
+    expended++;
 		if (depth ==0 | board.isGoal()){
 			if(heu.equals("o1"))
 			return Strategy.offensiveGiven(board, mColor);
@@ -26,12 +27,15 @@ public class ABsearch{
 			else{
 				nextColor = Board.WHITE;
 			}
-			for (Board it_board : board.getSuccessors(Board.BLACK)) {
+			List<Board> successors = new ArrayList<Board>();
+			successors = board.getSuccessors(mColor);
+			for (Board it_board : successors) {
+				expended++;
 				bestValue = Math.max(bestValue, AlphaBeta(it_board, depth-1, a, b, nextColor, false, heu));
-				a = Math.max(a, bestValue);
-				if(b <= a){
-					break; // b cut off
+				if(bestValue >= b){
+					return bestValue;
 				}
+				a = Math.max(a, bestValue);
 			}
 			return bestValue;
 
@@ -46,19 +50,22 @@ public class ABsearch{
 			else{
 				nextColor = Board.WHITE;
 			}
-			for (Board it_board : board.getSuccessors(Board.WHITE)) {
+			List<Board> successors = new ArrayList<Board>();
+			successors = board.getSuccessors(mColor);
+			for (Board it_board : successors) {
 				bestValue = Math.min(bestValue, AlphaBeta(it_board, depth-1, a, b, nextColor, true, heu));
 				b = Math.min(b, bestValue);
-				if(b <= a){
-					break; // a cut off
+				if(bestValue <= a){
+					return bestValue;
 				}
+				b = Math.min(b, bestValue);
 			}
 			return bestValue;
 		}
 
 	}
 
-	public static Board getState(Board board, char mColor, String heu){
+	public Board getState(Board board, char mColor, String heu){
 
 		Board retval = new Board();
 	    List<Board> firstLevel = new ArrayList<Board>();
@@ -73,14 +80,21 @@ public class ABsearch{
 			else{
 				nextColor = Board.WHITE;
 			}
+			double a = (double)Integer.MIN_VALUE;
+			double b = (double)Integer.MAX_VALUE;
 	    for(Board curr : firstLevel){
-	      double v = AlphaBeta(curr, DEPTH - 1, (double)Integer.MIN_VALUE, (double)Integer.MAX_VALUE, nextColor, false, heu);
+				expended++;
+	      double v = AlphaBeta(curr, DEPTH - 1, a, b, nextColor, false, heu);
 	      curr.value = v;
 	      if(v > bestValue){
 	      	//find the max value
 	        retval = new Board(curr);
 	        bestValue = v;
 	      }
+				a = Math.max(a, bestValue);
+				if(b <= a){
+					break; // b cut off
+				}
 	    }
 
 	    return retval;

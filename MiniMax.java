@@ -3,16 +3,16 @@ import java.lang.Math;
 
 class MiniMax{
   // public static Board test  = new Board();
-  public static final int MAX_DEPTH = 4;
-  public static double minimax(Board board, int depth, char mColor, Boolean max){
-
+  public static final int MAX_DEPTH = 3;
+  public int expended = 0;
+  public double minimax(Board board, int depth, char mColor, Boolean maxPlayer){
+      expended++;
   	if(depth == 0 | board.isGoal()){
-
   		return Strategy.offensiveGiven(board, mColor);
 
   	}
   	// max player
-  	if(max){
+  	if(maxPlayer){
 
   		double bestValue = (double)Integer.MIN_VALUE;
       char nextColor;
@@ -22,7 +22,10 @@ class MiniMax{
       else{
         nextColor = Board.WHITE;
       }
-  		for (Board it_board : board.getSuccessors(mColor)) {
+      List<Board> successors = new ArrayList<Board>();
+			successors = board.getSuccessors(mColor);
+  		for (Board it_board : successors) {
+
   			double max = minimax(it_board, depth-1, nextColor, false);
   	   bestValue = Math.max(bestValue, max);
 
@@ -41,7 +44,9 @@ class MiniMax{
        else{
          nextColor = Board.WHITE;
        }
-  		for (Board it_board : board.getSuccessors(mColor)) {
+       List<Board> successors = new ArrayList<Board>();
+ 			successors = board.getSuccessors(mColor);
+  		for (Board it_board : successors) {
 
   			double max = minimax(it_board, depth-1, nextColor, true); // change to next state
   			bestValue = Math.min(bestValue, max);
@@ -54,7 +59,7 @@ class MiniMax{
 
   }
 
-  public static Board getState(Board board, char mColor){
+  public Board getState(Board board, char mColor){
     Board retval = new Board();
     List<Board> firstLevel = new ArrayList<Board>();
     firstLevel = board.getSuccessors(Board.BLACK);
@@ -67,6 +72,7 @@ class MiniMax{
       nextColor = Board.WHITE;
     }
     for(Board curr : firstLevel){
+      expended++;
       double v = minimax(curr, MAX_DEPTH - 1, nextColor, false);
       curr.value = v;
       if(v > bestValue){
