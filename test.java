@@ -2,9 +2,9 @@ import java.util.*;
 public class test{
 	 public static final int MAX_DEPTH = 4;
 	public static double minimax(Board board, int depth, char mColor){
-    
+
   	if(depth == 0 | board.isGoal()){
-  
+
   		return Strategy.defensiveGiven(board, mColor);
 
   	}
@@ -12,7 +12,7 @@ public class test{
   	if(mColor == Board.WHITE){
 
   		double bestValue = (double)Integer.MIN_VALUE;
-    
+
   		for (Board it_board : board.getSuccessors(mColor)) {
   			double max = minimax(it_board, depth-1, Board.BLACK);
   	   bestValue = Math.max(bestValue, max);
@@ -25,7 +25,7 @@ public class test{
   	else {
 
   	   double bestValue = (double)Integer.MAX_VALUE;
-  
+
   		for (Board it_board : board.getSuccessors(mColor)) {
 
   			double max = minimax(it_board, depth-1, Board.WHITE); // change to next state
@@ -48,7 +48,7 @@ public class test{
       double v = minimax(curr, MAX_DEPTH - 1, Board.BLACK);
       curr.value = v;
       if(v > bestValue){
-        retval = new Board(curr); 
+        retval = new Board(curr);
         bestValue = v;
       }
     }

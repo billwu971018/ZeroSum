@@ -5,7 +5,14 @@ class Strategy{
 		return 2 * board.numRem(mColor) + Math.random();
 	}
 
-	public static double offensiveGiven(Board board, char oColor){
+	public static double offensiveGiven(Board board, char mColor){
+		char oColor;
+		if(mColor == Board.BLACK){
+			oColor = Board.WHITE;
+		}
+		else{
+			oColor = Board.BLACK;
+		}
 		return 2*(30 - board.numRem(oColor)) + Math.random();
 	}
 
@@ -13,16 +20,31 @@ class Strategy{
 		return -1.0;
 	}
 
-	public static double offensive(Board board, char oColor){
-		char mColor;
-		if(oColor == Board.BLACK){
-			mColor = Board.WHITE;
+	public static double offensive(Board board, char mColor){
+		char oColor;
+		if(mColor == Board.BLACK){
+			oColor = Board.WHITE;
 		}
 		else{
-			mColor = Board.BLACK;
+			oColor = Board.BLACK;
 		}
+<<<<<<< HEAD
 		return 40*(board.numRem(mColor) -1.5 * board.numRem(oColor)) + Math.random() 
 		+  1.5* board.maxdistanceScore(mColor) + Math.random();
 	}
 
 }
+=======
+		return board.numRem(mColor) - board.numRem(oColor) + Math.random();
+	}
+
+	// public static int chooseStrategy(String myStrategy, Board, ){
+
+	// }
+	// public static
+
+
+
+
+}
+>>>>>>> 2431b956c0ed93f30b4de42580c62b955a7162b2
