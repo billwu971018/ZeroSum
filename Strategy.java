@@ -65,11 +65,11 @@ class Strategy{
 			 	winStep = Collections.max(blackDist);
 			}
 
-			if(winStep == 7){
+			if(winStep == 6){
 				// winning step only from 6
-				if(depth == 4) maxDist = 1000000;
 				if(depth == 3) maxDist = 10000;
-		 		if(depth == 2) maxDist = 1000;
+				if(depth == 2) maxDist = 1000;
+		 		//if(depth == 2) maxDist = 1000;
 
 			 }
 
@@ -78,7 +78,7 @@ class Strategy{
 		 	if(!whiteDist.isEmpty()){
 		 		owinStep = Collections.max(whiteDist);
 		 	}
-		 	if( owinStep == 7 ){
+		 	if( owinStep == 6){
 		 	    if(depth == 3) maxDistOp = 10000;
 		 	    if(depth == 2) maxDistOp = 1000;
 		 	}
@@ -90,17 +90,17 @@ class Strategy{
 			if(!whiteDist.isEmpty()) {
 			 	winStep = Collections.max(whiteDist);
 			}
-			if(winStep == 7){
-				if(depth == 4) maxDist = 1000000;
+			if(winStep == 6){
 				if(depth == 3) maxDist = 10000;
-		 		if(depth == 2) maxDist = 1000;
+				if(depth == 2) maxDist = 1000;
+		 		//if(depth == 2) maxDist = 1000;
 		 	}
 		 	//my opponent score
 		 	int owinStep = 0;
 		 	if(!blackDist.isEmpty()){
 		 		owinStep = Collections.max(blackDist);
 		 	}
-		 	if( owinStep == 7 ){
+		 	if( owinStep == 6 ){
 		 	    if(depth == 3) maxDistOp = 10000;
 		 	    if(depth == 2) maxDistOp = 1000;
 		 	}
@@ -108,11 +108,11 @@ class Strategy{
 	 	}
 
 
-    	double retval = 20 * (board.numRem(mColor) - 1.5 * board.numRem(oColor)) + 1.5 * totalMScore - totalOScore + Math.random();
+    	double retval = 20 * (board.numRem(mColor) - 1.5 * board.numRem(oColor)) + 1.5 * totalMScore - totalOScore + 100 * maxDist - 50 * maxDistOp + Math.random();
 
 		//System.out.println("totalMScore : " + totalMScore);
 		//System.out.println("totalOScore : " + totalOScore);
-		System.out.println("o2 score : " + retval);
+		//System.out.println("o2 score : " + retval);
 		return retval;
 	}
 
@@ -173,7 +173,7 @@ class Strategy{
 		 	if(!whiteDist.isEmpty()){
 		 		owinStep = Collections.max(whiteDist);
 		 	}
-		 	if( owinStep == 7 ){
+		 	if( owinStep == 6 ){
 		 	    if(depth == 3) maxDistOp = 10000;
 		 	    if(depth == 2) maxDistOp = 1000;
 		 	}
@@ -185,7 +185,7 @@ class Strategy{
 			if(!whiteDist.isEmpty()) {
 			 	winStep = Collections.max(whiteDist);
 			}
-			if(winStep == 7){
+			if(winStep == 6){
 				if(depth == 3) maxDist = 10000;
 		 		if(depth == 2) maxDist = 1000;
 		 	}
@@ -194,7 +194,7 @@ class Strategy{
 		 	if(!blackDist.isEmpty()){
 		 		owinStep = Collections.max(blackDist);
 		 	}
-		 	if( owinStep == 7 ){
+		 	if( owinStep == 6 ){
 		 	    if(depth == 3) maxDistOp = 10000;
 		 	    if(depth == 2) maxDistOp = 1000;
 		 	}
@@ -202,7 +202,7 @@ class Strategy{
 	 	}
 
 
-	    double retval = 30 * (6 * board.numRem(mColor) - board.numRem(oColor)) + totalMScore - 1.5 * totalOScore + Math.random();
+	    double retval = 30 * (6 * board.numRem(mColor) - board.numRem(oColor)) + totalMScore - 1.5 * totalOScore + 50 * maxDist - 100 * maxDistOp - Math.random();
 			//System.out.println("totalMScore : " + totalMScore);
 			//System.out.println("totalOScore : " + totalOScore);
 			//System.out.println("o2 score : " + retval);

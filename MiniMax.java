@@ -74,11 +74,11 @@ class MiniMax{
       nextColor = Board.WHITE;
     }
     for(Board curr : firstLevel){
+            expended++;
       if(curr.isGoal()){
-        
+
         return curr;
       }
-      expended++;
       double v = minimax(curr, MAX_DEPTH - 1, nextColor, false);
       curr.value = v;
       if(v > bestValue){

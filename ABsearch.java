@@ -13,7 +13,7 @@ public class ABsearch{
 			return Strategy.offensiveGiven(board, mColor);
 			if(heu.equals("o2"))
 			return Strategy.offensive(board, mColor, depth);
-		}
+
 			if(heu.equals("d1")){
 			return Strategy.defensiveGiven(board, mColor);
 		}
@@ -82,12 +82,12 @@ public class ABsearch{
 			double a = (double)Integer.MIN_VALUE;
 			double b = (double)Integer.MAX_VALUE;
 	    for(Board curr : firstLevel){
+				expended++;
 	    	if(curr.isGoal()){
 	    		System.out.println("test goal");
 	    		return curr;
 
 	    	}
-	    	expended++;
 	      double v = AlphaBeta(curr, DEPTH - 1, a, b, nextColor, false, heu);
 	      curr.value = v;
 	      if(v > bestValue){
