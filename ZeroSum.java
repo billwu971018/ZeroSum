@@ -218,7 +218,7 @@ public class ZeroSum extends JFrame  {
     // testprint(a);
     //ABsearch player1 = new ABsearch();
     //for minimax
-    ABsearch player1 = new ABsearch();
+    MiniMax player1 = new MiniMax();
     ABsearch player2 = new ABsearch();
     int i = 0;
     int move = 0;
@@ -230,7 +230,7 @@ public class ZeroSum extends JFrame  {
     while(!a.isGoal()){
       if(i%2 == 0){
         move++;
-        a = new Board(player1.getState(a, Board.BLACK, "d2"));
+        a = new Board(player1.getState(a, Board.BLACK));
         testprint(a);
         System.out.println();
         a.printBoard();

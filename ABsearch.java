@@ -8,7 +8,7 @@ public class ABsearch{
 
 	public double AlphaBeta(Board board, int depth, double a, double b, char mColor, boolean maxPlayer, String heu){
     expended++;
-		if (depth ==0 | board.isGoal()){
+		if (depth ==0 || board.isGoal()){
 			if(heu.equals("o1"))
 			return Strategy.offensiveGiven(board, mColor);
 			if(heu.equals("o2"))
