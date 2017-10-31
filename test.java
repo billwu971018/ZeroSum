@@ -1,11 +1,11 @@
 import java.util.*;
 public class test{
-	 public static final int MAX_DEPTH = 4;
+	 public static final int MAX_DEPTH = 3;
 	public static double minimax(Board board, int depth, char mColor){
 
   	if(depth == 0 | board.isGoal()){
 
-  		return Strategy.defensiveGiven(board, mColor);
+  		return Strategy.offensiveGiven(board, mColor);
 
   	}
   	// max player

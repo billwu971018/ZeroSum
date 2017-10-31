@@ -3,7 +3,7 @@ import java.lang.Math;
 
 public class ABsearch{
 
-	public static final int DEPTH = 4;//search depth
+	public static int DEPTH = 4;//search depth
 	public int expended = 0;
 
 	public double AlphaBeta(Board board, int depth, double a, double b, char mColor, boolean maxPlayer, String heu){
@@ -13,8 +13,10 @@ public class ABsearch{
 			return Strategy.offensiveGiven(board, mColor);
 			if(heu.equals("o2"))
 			return Strategy.offensive(board, mColor, depth);
-			if(heu.equals("d1"))
+		}
+			if(heu.equals("d1")){
 			return Strategy.defensiveGiven(board, mColor);
+		}
 			return Strategy.defensive(board, mColor, depth);
 		}
 
@@ -27,10 +29,9 @@ public class ABsearch{
 			else{
 				nextColor = Board.WHITE;
 			}
-			List<Board> successors = new ArrayList<Board>();
-			successors = board.getSuccessors(mColor);
-			for (Board it_board : successors) {
-				expended++;
+
+			for (Board it_board : board.getSuccessors(mColor)) {
+
 				bestValue = Math.max(bestValue, AlphaBeta(it_board, depth-1, a, b, nextColor, false, heu));
 				a = Math.max(a, bestValue);
 				if(b <= a){
@@ -50,9 +51,8 @@ public class ABsearch{
 			else{
 				nextColor = Board.WHITE;
 			}
-			List<Board> successors = new ArrayList<Board>();
-			successors = board.getSuccessors(mColor);
-			for (Board it_board : successors) {
+			for (Board it_board : board.getSuccessors(mColor)) {
+
 				bestValue = Math.min(bestValue, AlphaBeta(it_board, depth-1, a, b, nextColor, true, heu));
 				b = Math.min(b, bestValue);
 				if(b <= a){
@@ -82,7 +82,12 @@ public class ABsearch{
 			double a = (double)Integer.MIN_VALUE;
 			double b = (double)Integer.MAX_VALUE;
 	    for(Board curr : firstLevel){
-				expended++;
+	    	if(curr.isGoal()){
+	    		System.out.println("test goal");
+	    		return curr;
+
+	    	}
+	    	expended++;
 	      double v = AlphaBeta(curr, DEPTH - 1, a, b, nextColor, false, heu);
 	      curr.value = v;
 	      if(v > bestValue){
