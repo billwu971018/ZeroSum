@@ -180,9 +180,9 @@ class Board{
           retval.add(this.board[j][i]);
 
           //adding black chessmen distance
-          int input = i;
-          //System.out.println("INPUT : " + input);
-          closetBlack.add(input);
+          // int input = i;
+          // //System.out.println("INPUT : " + input);
+          // closetBlack.add(input);
 
         }
       }
@@ -211,7 +211,7 @@ class Board{
           for(int j = 0; j < 8; j++){
             if(this.board[j][i].value == WHITE){
               //adding black chessmen distance
-              int input = 8 - i;
+              int input = 7 - i;
               retval.add(input);
 
             }
@@ -230,8 +230,8 @@ class Board{
           retval.add(this.board[j][i]);
 
           // adding white chessmen distance
-          int input = 7 - i;
-          closetWhite.add(input);
+          // int input = 7 - i;
+          // closetWhite.add(input);
 
         }
       }

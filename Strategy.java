@@ -107,12 +107,9 @@ class Strategy{
 
 	 	}
 
-<<<<<<< HEAD
-    	double retval = (board.numRem(mColor) - 1.5 * board.numRem(oColor)) +
-    					1.5 * totalMScore +2 * maxDist + Math.random();
-=======
+
     	double retval = 20 * (board.numRem(mColor) - 1.5 * board.numRem(oColor)) + 1.5 * totalMScore - totalOScore + 100 * maxDist - 50 * maxDistOp + Math.random();
->>>>>>> 60320e6459612665639d3dfefdc89e3d6b7760ec
+
 		//System.out.println("totalMScore : " + totalMScore);
 		//System.out.println("totalOScore : " + totalOScore);
 		System.out.println("o2 score : " + retval);

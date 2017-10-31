@@ -282,7 +282,7 @@ public class ZeroSum extends JFrame  {
     frame.setResizable(true);
     frame.setLocationRelativeTo( null );
     frame.setVisible(true);
-    frame.setTitle("testestet");
+    frame.setTitle("BreakThrough");
    
 
     Component currSquare =  chessBoard.findComponentAt(1 * 75, 1*75);
@@ -319,7 +319,8 @@ public class ZeroSum extends JFrame  {
     //ABsearch player1 = new ABsearch();
     //for minimax
     ABsearch player1 = new ABsearch();
-    ABsearch player2 = new ABsearch();
+    MiniMax player2 = new MiniMax();
+    // ABsearch player2 = new ABsearch();
 
     int i = 0;
     int move = 0;
@@ -328,11 +329,12 @@ public class ZeroSum extends JFrame  {
     int whiteCaptured = 0;
     String winner = "";
     long startTime = System.nanoTime();
+    //begin between two ai
     while(!a.isGoal()){
-      if(i%2 == 0){
 
+      if(i%2 == 0){
         move++;
-        a = new Board(player1.getState(a, Board.BLACK, "d2"));
+        a = new Board(player2.getState(a, Board.BLACK));
 
         testprint(a);
         System.out.println();
@@ -340,13 +342,13 @@ public class ZeroSum extends JFrame  {
         if(a.isGoal()){
           blackCaptured = 16 - a.numRem(Board.WHITE);
           whiteCaptured = 16 - a.numRem(Board.BLACK);
-          winner = "First Player BLACK(RED)";
+          winner = "Second Player BLACK(AlphaBeta)";
         }
       }
       else{
 
         move++;
-        a = new Board(player2.getState(a, Board.WHITE, "o1"));
+        a = new Board(player1.getState(a, Board.WHITE, "o1"));
 
         testprint(a);
         System.out.println();
@@ -354,7 +356,7 @@ public class ZeroSum extends JFrame  {
         if(a.isGoal()){
           blackCaptured = 16 - a.numRem(Board.WHITE);
           whiteCaptured = 16 - a.numRem(Board.BLACK);
-          winner = "Second Player WHITE(BLUE)";
+          winner = "First Player WHITE(MiniMax)";
         }
       }
       i++;
@@ -364,13 +366,13 @@ public class ZeroSum extends JFrame  {
     long deltaTime = endTime - startTime;
     double avgTime = deltaTime / (double)move;
     System.out.println(winner + " WINS!");
-    System.out.println("Player1 BLACK(RED) expended: " + player1.expended);
-    System.out.println("Player2 WHITE(BLUE) expended: " + player2.expended);
-    double avgMove = ((double)player1.expended + (double)player2.expended) / move;
+    System.out.println("Player1 BLACK(AlphaBeta(depth4)) expended: " + player2.expended);
+    System.out.println("Player2 WHITE(minimax(depth3)) expended: " + player1.expended);
+    double avgMove = ((double)player2.expended + (double)player1.expended) / move;
     System.out.println("Average nodes expended per move: " + avgMove);
     System.out.println("Average time(second) used for per move: " + avgTime/1000000000 + "s");
-    System.out.println("BLACK(RED) captured: " + blackCaptured + " opponent workers.");
-    System.out.println("WHITE(BLUE) captured: " + whiteCaptured + " opponent workers.");
+    System.out.println("BLACK(AlphaBeta) captured: " + blackCaptured + " opponent workers.");
+    System.out.println("WHITE(MiniMax) captured: " + whiteCaptured + " opponent workers.");
     System.out.println("Total number of moves: " + move);
 
   }

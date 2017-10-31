@@ -3,7 +3,7 @@ import java.lang.Math;
 
 class MiniMax{
   // public static Board test  = new Board();
-  public static final int MAX_DEPTH = 3;
+  public static int MAX_DEPTH = 3;
   public int expended = 0;
   public double minimax(Board board, int depth, char mColor, Boolean maxPlayer){
       expended++;
@@ -62,7 +62,9 @@ class MiniMax{
   public Board getState(Board board, char mColor){
     Board retval = new Board();
     List<Board> firstLevel = new ArrayList<Board>();
-    firstLevel = board.getSuccessors(Board.BLACK);
+
+    firstLevel = board.getSuccessors(mColor);
+
     double bestValue = (double)Integer.MIN_VALUE;
     char nextColor;
     if(mColor == Board.WHITE){
@@ -72,6 +74,10 @@ class MiniMax{
       nextColor = Board.WHITE;
     }
     for(Board curr : firstLevel){
+      if(curr.isGoal()){
+        
+        return curr;
+      }
       expended++;
       double v = minimax(curr, MAX_DEPTH - 1, nextColor, false);
       curr.value = v;
