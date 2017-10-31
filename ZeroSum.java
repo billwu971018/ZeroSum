@@ -319,8 +319,8 @@ public class ZeroSum extends JFrame  {
     //ABsearch player1 = new ABsearch();
     //for minimax
     ABsearch player1 = new ABsearch();
-    MiniMax player2 = new MiniMax();
-    // ABsearch player2 = new ABsearch();
+    // MiniMax player2 = new MiniMax();
+    ABsearch player2 = new ABsearch();
 
     int i = 0;
     int move = 0;
@@ -332,9 +332,9 @@ public class ZeroSum extends JFrame  {
     //begin between two ai
     while(!a.isGoal()){
 
-      if(i%2 == 0){
+      if(i%2 == 1){
         move++;
-        a = new Board(player2.getState(a, Board.BLACK));
+        a = new Board(player2.getState(a, Board.BLACK,"d1"));
 
         testprint(a);
         System.out.println();
@@ -348,7 +348,7 @@ public class ZeroSum extends JFrame  {
       else{
 
         move++;
-        a = new Board(player1.getState(a, Board.WHITE, "o1"));
+        a = new Board(player1.getState(a, Board.WHITE, "o2"));
 
         testprint(a);
         System.out.println();
